@@ -42,7 +42,7 @@ and round() function to only get 1 number after ','.
 
 [docs for round()](https://www.w3resource.com/PostgreSQL/round-function.php)
 
-## how to run
+## 4. How to run
 
 - create the views in the news database from fullstack nano degree course
 - run log.py using 
