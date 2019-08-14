@@ -36,8 +36,8 @@ then i joined the in the query calculating the pourcentage of failed request on 
 ```
 
 i used the cast() function on one of the fields to turn the results to decimal value
-and round() function to only get 1 number after ','
-[docs for cast()](http://www.postgresqltutorial.com/postgresql-cast/)
+and round() function to only get 1 number after ','. \s\s
+[docs for cast()](http://www.postgresqltutorial.com/postgresql-cast/) \s\s
 [docs for round()](https://www.w3resource.com/PostgreSQL/round-function.php)
 
 ## how to run
