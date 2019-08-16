@@ -1,18 +1,26 @@
-# Database code for the DB Forum.
-#
-# This is still NOT the full solution!
+#!/usr/bin/python3
 
 import psycopg2
 import bleach
 
 DBNAME = "news"
 
+def connectDb(db):
+    cn = null
+    try:
+        cn = psycopg2.connect(database=db)
+    except psycopg2.Errot as e:
+        print ("cannot connect to db: \n"+e.pgerror)
+        print(e.diag.message_detail)
+        sys.exit(1)
+    return cn
+
 
 def get_top_articles():
     # Return top 3 most viewed articles
     # i used split_part function to get only the slug part from path in logs so
     # i can use is in join with slug in articles
-    db = psycopg2.connect(database=DBNAME)
+    db = connectDb(DBNAME)
     c = db.cursor()
     query = "select a.title,count(l.path) as visits " \
             + "from articles a " \
@@ -32,7 +40,7 @@ def get_top_authors():
     # Return top 3 most viewed articles
     # i used split_part function to get only the slug part from path in logs so
     # i can use is in join with slug in articles
-    db = psycopg2.connect(database=DBNAME)
+    db = connectDb(DBNAME)
     c = db.cursor()
     query = "select au.name , count(l.path) visits " \
             + "from (articles a join authors u on a.author=u.id) au " \
@@ -52,7 +60,7 @@ def get_days_with_errors():
   # Return top 3 most viewed articles
   # i used split_part function to get only the slug part from path in logs so
   # i can use is in join with slug in articles
-  db = psycopg2.connect(database=DBNAME)
+  db = connectDb(DBNAME)
   c = db.cursor()
   query = "select s.ntime ,"\
           + "ROUND((100*cast(f.failure as decimal )/(f.failure+s.sucess)), 1) as f_perc"\
